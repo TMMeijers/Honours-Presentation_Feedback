@@ -12,11 +12,9 @@ public class Mat2Buffered {
 	
 	private BufferedImage img;
 	
-	public Mat2Buffered(WebcamImage im) {
+	public Mat2Buffered(Mat m) {
 		// Convert opencv.Mat to BufferedImage
 		// source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
-		
-		Mat m = im.imgMatrix;
 		
 	    int type = BufferedImage.TYPE_BYTE_GRAY;
 	    if ( m.channels() > 1 ) {
