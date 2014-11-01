@@ -1,5 +1,7 @@
 # IGNORED FILE EXTENSIONS
 *.txt
+*~
+*.class
 
 # ECLIPSE RELATED:
 Code/OpenCV tests/bin/
