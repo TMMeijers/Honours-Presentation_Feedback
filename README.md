@@ -46,3 +46,5 @@ DOCUMENTATION:
 http://docs.opencv.org/java/overview-summary.html
 - Explanation of FFT:
 http://math.stackexchange.com/questions/1002/fourier-transform-for-dummies
+- Simple OpenCV motion detection:
+http://blog.cedric.ws/opencv-simple-motion-detection

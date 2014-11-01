@@ -2,6 +2,7 @@
 *.txt
 *~
 *.class
+*.jpg
 
 # ECLIPSE RELATED:
 Code/OpenCV tests/bin/
