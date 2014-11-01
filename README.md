@@ -44,3 +44,5 @@ DOCUMENTATION:
 
 - OpenCV Javadoc:
 http://docs.opencv.org/java/overview-summary.html
+- Explanation of FFT:
+http://math.stackexchange.com/questions/1002/fourier-transform-for-dummies
