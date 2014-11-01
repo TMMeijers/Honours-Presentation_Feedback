@@ -1,2 +1,7 @@
+# IGNORED FILE EXTENSIONS
 *.txt
+
+# ECLIPSE RELATED:
+Code/OpenCV tests/bin/
+*.project
 *.metadata
