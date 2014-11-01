@@ -46,3 +46,5 @@ DOCUMENTATION:
 http://docs.opencv.org/java/overview-summary.html
 - Explanation of FFT:
 http://math.stackexchange.com/questions/1002/fourier-transform-for-dummies
+www.dspguide.com/ch12/2.htm
+www.dspguide.com/ch12/3.htm
