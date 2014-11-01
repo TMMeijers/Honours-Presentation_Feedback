@@ -1,5 +1,5 @@
 HONOURS PROJECT 2014 - Presentation skills automatic real-time feedback mechanisms
-
+ 
 Supervisor: Anthony van Inge 
 Email:  A.vanInge [at] uva.nl
 Website: https://staff.fnwi.uva.nl/a.vaninge/
@@ -44,7 +44,11 @@ DOCUMENTATION:
 
 - OpenCV Javadoc:
 http://docs.opencv.org/java/overview-summary.html
+
 - Explanation of FFT:
 http://math.stackexchange.com/questions/1002/fourier-transform-for-dummies
+www.dspguide.com/ch12/2.htm
+www.dspguide.com/ch12/3.htm
+
 - Simple OpenCV motion detection:
 http://blog.cedric.ws/opencv-simple-motion-detection
