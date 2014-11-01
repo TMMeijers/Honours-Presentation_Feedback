@@ -3,6 +3,10 @@ HONOURS PROJECT 2014 - Presentation skills automatic real-time feedback mechanis
 Supervisor: Anthony van Inge 
 Email:  A.vanInge [at] uva.nl
 Website: https://staff.fnwi.uva.nl/a.vaninge/
+Contributors: 
+A.P. van Ree (apvanree [at] gmail.com)
+G.M. Linders (guido0013 [at] hotmail.com)
+T.M. Meijers (t.m.meijers [at] hotmail.com)
 
 ===============================
 
@@ -30,6 +34,13 @@ readability statistics).
 
 ===============================
 
-GIT IGNORE:
+COMMENTS:
 
-*.txt
+For personal notes use .txt files as these are ignored
+
+===============================
+
+DOCUMENTATION:
+
+- OpenCV Javadoc:
+http://docs.opencv.org/java/overview-summary.html
