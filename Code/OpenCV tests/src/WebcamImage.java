@@ -1,5 +1,7 @@
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
+import org.opencv.imgproc.Imgproc;
 
 public class WebcamImage {
 	
@@ -29,6 +31,14 @@ public class WebcamImage {
 		webcam.read(temp);
 		webcam.read(temp);
 		
-		imgMatrix = temp;
+		imgMatrix = new Mat(temp.rows(), temp.cols(), CvType.CV_8UC1);
+		
+		System.out.println("Image type: " + temp.type());
+	    Imgproc.cvtColor(temp, imgMatrix, Imgproc.COLOR_RGB2GRAY);
+		System.out.println("Done!");
+
+	    
+		Mat2Buffered bufImg = new Mat2Buffered(imgMatrix);
+		bufImg.display();
 	}
 }

@@ -9,13 +9,13 @@ public class SimpleMotionDetection {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 1000;
-		int nrOfFrames = 10;
+		int nrOfFrames = 3;
 		
 		// For displaying and writing to disk
-		boolean saveResults = false;
+		boolean saveResults = true;
 		boolean displayOriginals = false;
 		boolean displayIntermediate = false;
-		boolean displayResults = true;
+		boolean displayResults = false;
 		
 		// Load openCV lib
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -23,7 +23,7 @@ public class SimpleMotionDetection {
 		// Capture images through webcam, 1 frame per pause
 		System.out.println("Get ready!");
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(0);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			Thread.currentThread().interrupt();
