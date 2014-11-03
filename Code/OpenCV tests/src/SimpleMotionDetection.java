@@ -12,10 +12,10 @@ public class SimpleMotionDetection {
 		int nrOfFrames = 10;
 		
 		// For displaying and writing to disk
-		boolean saveResults = true;
+		boolean saveResults = false;
 		boolean displayOriginals = false;
 		boolean displayIntermediate = false;
-		boolean displayResults = false;
+		boolean displayResults = true;
 		
 		// Load openCV lib
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
