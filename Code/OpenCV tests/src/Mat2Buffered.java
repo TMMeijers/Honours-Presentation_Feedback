@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
@@ -30,6 +33,24 @@ public class Mat2Buffered {
 
 	public void display() {
 	    // Display BufferedImage
+		
+	    ImageIcon icon = new ImageIcon(img);
+	    JFrame frame = new JFrame();
+	    frame.setLayout(new FlowLayout());        
+	    frame.setSize(img.getWidth(null)+50, img.getHeight(null)+50);     
+	    JLabel lbl = new JLabel();
+	    lbl.setIcon(icon);
+	    frame.add(lbl);
+	    frame.setVisible(true);
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void display(Rectangle rect) {
+	    // Display BufferedImage
+		
+		Graphics2D draw = img.createGraphics();
+		draw.setColor(Color.red);
+		draw.drawRect(rect.x, rect.y, rect.height, rect.width);
 		
 	    ImageIcon icon = new ImageIcon(img);
 	    JFrame frame = new JFrame();

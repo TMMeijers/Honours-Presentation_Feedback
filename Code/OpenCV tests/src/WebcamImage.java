@@ -30,15 +30,9 @@ public class WebcamImage {
 		// Two reads to empty buffer
 		webcam.read(temp);
 		webcam.read(temp);
-		
+		 	
 		imgMatrix = new Mat(temp.rows(), temp.cols(), CvType.CV_8UC1);
-		
-		System.out.println("Image type: " + temp.type());
 	    Imgproc.cvtColor(temp, imgMatrix, Imgproc.COLOR_RGB2GRAY);
-		System.out.println("Done!");
 
-	    
-		Mat2Buffered bufImg = new Mat2Buffered(imgMatrix);
-		bufImg.display();
 	}
 }
