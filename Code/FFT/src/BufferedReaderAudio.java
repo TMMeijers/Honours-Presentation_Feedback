@@ -5,8 +5,10 @@ public class BufferedReaderAudio {
 
 	public static void main(String[] args) {
 		
+		BufferedReader br = null;
+		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("junk.wav"));
+			br = new BufferedReader(new FileReader("junk.wav"));
 			String line = br.readLine();
 			ArrayList<String> real = new ArrayList<String>();
 			while(line != null) {
@@ -25,6 +27,12 @@ public class BufferedReaderAudio {
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
+		}
+		
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

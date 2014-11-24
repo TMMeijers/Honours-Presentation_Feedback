@@ -51,8 +51,9 @@ import java.awt.event.*;
 import java.io.*;
 import javax.sound.sampled.*;
 
+@SuppressWarnings("serial")
 public class AudioRecorder02 extends JFrame {
-
+	
 	AudioFormat audioFormat;
 	TargetDataLine targetDataLine;
 
