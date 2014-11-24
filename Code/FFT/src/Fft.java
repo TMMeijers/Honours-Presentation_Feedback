@@ -175,10 +175,10 @@ public class Fft {
 			throw new IllegalArgumentException("Mismatched lengths");
 		
 		int n = xreal.length;
-		xreal = xreal.clone();
-		ximag = ximag.clone();
-		yreal = yreal.clone();
-		yimag = yimag.clone();
+		xreal = (double[]) xreal.clone();
+		ximag = (double[]) ximag.clone();
+		yreal = (double[]) yreal.clone();
+		yimag = (double[]) yimag.clone();
 		
 		transform(xreal, ximag);
 		transform(yreal, yimag);

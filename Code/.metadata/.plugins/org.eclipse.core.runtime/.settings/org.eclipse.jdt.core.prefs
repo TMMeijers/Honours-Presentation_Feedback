@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/Program Files/Java/jre1.8.0_20/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
+org.eclipse.jdt.core.userLibrary.OpenCV-2.4.10=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="D\:/Program Files/OpenCV/opencv/build/java/opencv-2410.jar">\r\n\t\t<attributes>\r\n\t\t\t<attribute name\="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value\="D\:/Program Files/OpenCV/opencv/build/java/x64"/>\r\n\t\t</attributes>\r\n\t</archive>\r\n</userlibrary>\r\n

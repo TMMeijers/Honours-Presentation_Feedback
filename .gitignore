@@ -4,8 +4,3 @@
 *.class
 *.jpg
 *.png
-
-# ECLIPSE RELATED:
-Code/OpenCV tests/bin/
-*.project
-*.metadata

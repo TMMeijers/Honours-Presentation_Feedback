@@ -63,7 +63,7 @@ public class FftTest {
 		}
 		
 		System.out.println();
-		System.out.printf("Max log err = %.1f%n", maxLogError);
+		//System.out.printf("Max log err = %.1f%n", maxLogError);
 		System.out.println("Test " + (maxLogError < -10 ? "passed" : "failed"));
 	}
 	
@@ -76,11 +76,11 @@ public class FftTest {
 		double[] refoutimag = new double[size];
 		naiveDft(inputreal, inputimag, refoutreal, refoutimag, false);
 		
-		double[] actualoutreal = inputreal.clone();
-		double[] actualoutimag = inputimag.clone();
+		double[] actualoutreal = (double[]) inputreal.clone();
+		double[] actualoutimag = (double[]) inputimag.clone();
 		Fft.transform(actualoutreal, actualoutimag);
 		
-		System.out.printf("fftsize=%4d  logerr=%5.1f%n", size, log10RmsErr(refoutreal, refoutimag, actualoutreal, actualoutimag));
+		//System.out.printf("fftsize=%4d  logerr=%5.1f%n", size, log10RmsErr(refoutreal, refoutimag, actualoutreal, actualoutimag));
 	}
 	
 	
@@ -99,7 +99,7 @@ public class FftTest {
 		double[] actualoutimag = new double[size];
 		Fft.convolve(input0real, input0imag, input1real, input1imag, actualoutreal, actualoutimag);
 		
-		System.out.printf("convsize=%4d  logerr=%5.1f%n", size, log10RmsErr(refoutreal, refoutimag, actualoutreal, actualoutimag));
+		//System.out.printf("convsize=%4d  logerr=%5.1f%n", size, log10RmsErr(refoutreal, refoutimag, actualoutreal, actualoutimag));
 	}
 	
 	
