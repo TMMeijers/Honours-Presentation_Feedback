@@ -31,6 +31,7 @@ public class WebcamImage {
 		webcam.read(temp);
 		webcam.read(temp);
 		 	
+		// Convert RGB to grayscale
 		imgMatrix = new Mat(temp.rows(), temp.cols(), CvType.CV_8UC1);
 	    Imgproc.cvtColor(temp, imgMatrix, Imgproc.COLOR_RGB2GRAY);
 
