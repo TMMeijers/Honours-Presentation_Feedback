@@ -148,6 +148,7 @@ public class FftTest {
 	
 	private static double maxLogError = Double.NEGATIVE_INFINITY;
 	
+	@SuppressWarnings("unused")
 	private static double log10RmsErr(double[] xreal, double[] ximag, double[] yreal, double[] yimag) {
 		if (xreal.length != ximag.length || xreal.length != yreal.length || yreal.length != yimag.length)
 			throw new IllegalArgumentException("Mismatched lengths");

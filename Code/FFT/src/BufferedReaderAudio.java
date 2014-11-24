@@ -1,12 +1,14 @@
 import java.util.*;
 import java.io.*;
 
-public class AnalyzeAudio {
+public class BufferedReaderAudio {
 
 	public static void main(String[] args) {
 		
+		BufferedReader br = null;
+		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("junk.wav"));
+			br = new BufferedReader(new FileReader("junk.wav"));
 			String line = br.readLine();
 			ArrayList<String> real = new ArrayList<String>();
 			while(line != null) {
@@ -26,6 +28,12 @@ public class AnalyzeAudio {
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
+		}
+		
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
