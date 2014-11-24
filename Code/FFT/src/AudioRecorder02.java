@@ -61,12 +61,7 @@ public class AudioRecorder02 extends JFrame {
 
 	final JPanel btnPanel = new JPanel();
 	final ButtonGroup btnGroup = new ButtonGroup();
-	final JRadioButton aifcBtn = new JRadioButton("AIFC");
-	final JRadioButton aiffBtn = new JRadioButton("AIFF");
-	final JRadioButton auBtn = // selected at startup
-	new JRadioButton("AU", true);
-	final JRadioButton sndBtn = new JRadioButton("SND");
-	final JRadioButton waveBtn = new JRadioButton("WAVE");
+	final JRadioButton waveBtn = new JRadioButton("WAVE", true);
 
 	public static void main(String args[]) {
 		new AudioRecorder02();
@@ -106,17 +101,9 @@ public class AudioRecorder02 extends JFrame {
 		getContentPane().add(stopBtn);
 
 		// Include the radio buttons in a group
-		btnGroup.add(aifcBtn);
-		btnGroup.add(aiffBtn);
-		btnGroup.add(auBtn);
-		btnGroup.add(sndBtn);
 		btnGroup.add(waveBtn);
 
 		// Add the radio buttons to the JPanel
-		btnPanel.add(aifcBtn);
-		btnPanel.add(aiffBtn);
-		btnPanel.add(auBtn);
-		btnPanel.add(sndBtn);
 		btnPanel.add(waveBtn);
 
 		// Put the JPanel in the JFrame
@@ -161,7 +148,7 @@ public class AudioRecorder02 extends JFrame {
 	private AudioFormat getAudioFormat() {
 		float sampleRate = 8000.0F;
 		// 8000,11025,16000,22050,44100
-		int sampleSizeInBits = 16;
+		int sampleSizeInBits = 8;
 		// 8,16
 		int channels = 1;
 		// 1,2
@@ -183,22 +170,8 @@ public class AudioRecorder02 extends JFrame {
 
 			// Set the file type and the file extension
 			// based on the selected radio button.
-			if (aifcBtn.isSelected()) {
-				fileType = AudioFileFormat.Type.AIFC;
-				audioFile = new File("junk.aifc");
-			} else if (aiffBtn.isSelected()) {
-				fileType = AudioFileFormat.Type.AIFF;
-				audioFile = new File("junk.aif");
-			} else if (auBtn.isSelected()) {
-				fileType = AudioFileFormat.Type.AU;
-				audioFile = new File("junk.au");
-			} else if (sndBtn.isSelected()) {
-				fileType = AudioFileFormat.Type.SND;
-				audioFile = new File("junk.snd");
-			} else if (waveBtn.isSelected()) {
-				fileType = AudioFileFormat.Type.WAVE;
-				audioFile = new File("junk.wav");
-			}// end if
+			fileType = AudioFileFormat.Type.WAVE;
+			audioFile = new File("src/junk.wav");
 
 			try {
 				targetDataLine.open(audioFormat);
