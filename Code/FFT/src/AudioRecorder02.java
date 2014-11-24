@@ -149,7 +149,7 @@ public class AudioRecorder02 extends JFrame {
 	private AudioFormat getAudioFormat() {
 		float sampleRate = 8000.0F;
 		// 8000,11025,16000,22050,44100
-		int sampleSizeInBits = 8;
+		int sampleSizeInBits = 16;
 		// 8,16
 		int channels = 1;
 		// 1,2
@@ -182,7 +182,6 @@ public class AudioRecorder02 extends JFrame {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}// end catch
-
 		}// end run
 	}// end inner class CaptureThread
 		// =============================================//

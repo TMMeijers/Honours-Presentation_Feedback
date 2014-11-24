@@ -41,8 +41,12 @@ public class AnalyzeAudio {
 		// FFT
 		Fft.transform(realInput, imagInput);
 		
-		for (double i : realInput) {
-			System.out.println(i);
+		int i = 0;
+		double[] bins = new double[nrSamples];
+		for (double bin : bins) {
+			bin = i * 8000 / nrSamples;
+			System.out.println("Freq : Encountered = " + bin + " : " + realInput[i]);
+			i++;
 		}
 	}
 	
