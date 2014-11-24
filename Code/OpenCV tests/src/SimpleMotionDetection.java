@@ -12,7 +12,7 @@ public class SimpleMotionDetection {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 1000;
-		int nrOfFrames = 4;
+		int nrOfFrames = 3;
 		
 		// For displaying and writing to disk
 		boolean saveResults = true;
