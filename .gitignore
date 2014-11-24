@@ -7,7 +7,7 @@
 *.wav
 
 # ECLIPSE RELATED:
-Code/OpenCV tests/bin/
-Code/FFT/bin/
+Code/OpenCV tests/bin/*
+Code/FFT/bin/*
 *.project
 *.metadata
