@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class AnalyzeAudio {
+public class BufferedReaderAudio {
 
 	public static void main(String[] args) {
 		
@@ -17,7 +17,6 @@ public class AnalyzeAudio {
 			    line = br.readLine();
 			}
 			for (int i = 0; i<real.size(); i++) {
-				System.out.println("Hooi");
 				System.out.println(real.get(i));	
 			}
 		}
