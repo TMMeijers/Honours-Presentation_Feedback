@@ -5,5 +5,19 @@
 *.jpg
 *.png
 *.xml
-.classpath
+*.wav
+
+# ECLIPSE RELATED:
 .metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.classpath
+.project
