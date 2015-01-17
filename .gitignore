@@ -4,3 +4,6 @@
 *.class
 *.jpg
 *.png
+*.xml
+.classpath
+.metadata
