@@ -8,8 +8,8 @@
 *.wav
 
 # ECLIPSE RELATED:
-.metadata
-.gradle
+*.metadata
+*.gradle
 bin/
 tmp/
 *.tmp
@@ -17,7 +17,8 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
-.loadpath
-.classpath
-.project
+*.settings/
+*.loadpath
+"Code/OpenCV tests/.classpath"
+*.classpath
+*.project

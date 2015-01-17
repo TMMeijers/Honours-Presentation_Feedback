@@ -12,10 +12,8 @@ public class AnalyzeFrames {
 	private float noMovement;
 	private static int NRFRAMES = 3;
 
-	public AnalyzeFrames(WebcamImage images[]) {
+	public AnalyzeFrames(WebcamImage images[], String path) {
 
-		// Path for saving experiment results (pictures)
-		String path = "experiment_results/MotionCapture/";
 		// For displaying and writing to disk
 		boolean saveResults = true;
 		boolean displayOriginals = false;
