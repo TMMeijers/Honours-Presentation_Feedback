@@ -1,19 +1,28 @@
 import org.opencv.core.Core;
 
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 public class MotionCapture {
 
 	public static void main(String args[]) {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
-		int pause = 2000; // 2 seconds between every frame
-		int recordTime = 30000; // 30 seconds
-		int getReadyTime = 5000; // 3 seconds
-		String path = "experiment_results/MotionCapture/";
+		int pause = 1000; // 1 seconds between every frame (every 30 seconds increases one second)
+		int recordTime = 90000; // 30 seconds
+		int getReadyTime = 3000; // 3 seconds
+		// Save pictures and resulting pictures:
+		boolean saveResults = true;
+		boolean saveOrgInt = true;
+		// Paths to save results
+//		String path = "experiment_results/MotionCapture/test/"; // Test folder to overwrite
+		String path = "experiment_results/MotionCapture/static/"; // Experiment while static
+//		String path = "experiment_results/MotionCapture/normal/"; // Experiment while normal
+//		String path = "experiment_results/MotionCapture/dynamic/"; // Experiment while very dynamic
 
 		// Open text file for writing results
 		File output = new File(path + "output_static.txt");
@@ -40,20 +49,39 @@ public class MotionCapture {
 			e.printStackTrace();
 			Thread.currentThread().interrupt();
 		}
-		
+		double outputs[] = new double[recordTime / (3 * pause)];
+		int index = 0;
 		// Loop that gets images, analyzes them and prints output
 		for (int t = 0; t < recordTime; t += 3 * pause) {
+			if (t == 30000) {
+				pause = 2000;
+			} 
+			if (t == 60000) {
+				pause = 3000;
+			}
 			// Capture three frames
 			WebcamImage images[] = getThreeFrames(pause);
 			// Analyse motion
-			AnalyzeFrames analysis = new AnalyzeFrames(images, path);
+			AnalyzeFrames analysis = new AnalyzeFrames(images, path, index, saveResults, saveOrgInt);
 			double movementPercentage = analysis.getMovementPercentage();
-			// Write content to output file
+			outputs[index] = movementPercentage;
 			try {
-				bw.write((int) movementPercentage);
+				// Write content to output file
+				bw.write(index + ". " + String.valueOf(movementPercentage) + '\n');
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			index++;
+		}
+		Mean mean = new Mean();
+		StandardDeviation stdv = new StandardDeviation();
+		double mu = mean.evaluate(outputs);
+		double sigma = stdv.evaluate(outputs, mu);
+		try {
+			// Write content to output file
+			bw.write("\nMean: " + String.valueOf(mu) + "\nStandard Dev: " + String.valueOf(sigma));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		// Close buffered writer

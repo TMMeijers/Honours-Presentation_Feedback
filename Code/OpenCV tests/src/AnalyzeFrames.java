@@ -11,11 +11,11 @@ public class AnalyzeFrames {
 	private float movement;
 	private float noMovement;
 	private static int NRFRAMES = 3;
+	private static int THRESHOLD = 20;
 
-	public AnalyzeFrames(WebcamImage images[], String path) {
+	public AnalyzeFrames(WebcamImage images[], String path, int picIndex, boolean saveResults, boolean saveOrgInt) {
 
 		// For displaying and writing to disk
-		boolean saveResults = true;
 		boolean displayOriginals = false;
 		boolean displayIntermediate = false;
 		boolean displayResults = false;
@@ -38,7 +38,7 @@ public class AnalyzeFrames {
 			Core.absdiff(images[i+1].imgMatrix, images[i+2].imgMatrix, temp2);
 			Core.bitwise_and(temp1, temp2, results[i]);
 
-			Imgproc.threshold(results[i], results[i], 100, 255, Imgproc.THRESH_BINARY);
+			Imgproc.threshold(results[i], results[i], THRESHOLD, 255, Imgproc.THRESH_BINARY);
 			
 			int changes = 0;
 			int min_x = 0;
@@ -84,10 +84,10 @@ public class AnalyzeFrames {
 			}
 			
 			// Save temp images to disk
-			if (saveResults) {
-				String name = path + "1.intermediate" + (i * 2 + 0) + ".jpg";
+			if (saveOrgInt) {
+				String name = path + picIndex + ".1.intermediate" + (i * 2 + 0) + ".jpg";
 				Highgui.imwrite(name, temp1);
-				name = path + "1.intermediate" + (i * 2 + 1) + ".jpg";
+				name = path + picIndex + ".1.intermediate" + (i * 2 + 1) + ".jpg";
 				Highgui.imwrite(name, temp2);
 			}
 		}
@@ -109,14 +109,16 @@ public class AnalyzeFrames {
 			}
 		}
 
-		if (saveResults) {
+		if (saveOrgInt) {
 			// Convert to buffered image and display
 			for (int i = 0; i < images.length; i++) {
-				String name = path + "0.original" + i + ".jpg";
+				String name = path + picIndex + ".0.original" + i + ".jpg";
 				Highgui.imwrite(name, images[i].imgMatrix);
 			}
+		}
+		if (saveResults) {
 			for (int i = 0; i < results.length; i++) {
-				String name = path + "3.result" + i + ".jpg";
+				String name = path + picIndex + ".3.result" + i + ".jpg";
 				Highgui.imwrite(name, results[i]);
 			}
 		}
