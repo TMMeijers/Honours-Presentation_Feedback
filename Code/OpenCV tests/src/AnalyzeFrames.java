@@ -13,17 +13,17 @@ public class AnalyzeFrames {
 	private static int NRFRAMES = 3;
 	private static int THRESHOLD = 20;
 
-	public AnalyzeFrames(WebcamImage images[], String path, int picIndex, boolean saveResults, boolean saveOrgInt) {
-
+	public AnalyzeFrames(Mat images[], String path, int picIndex, boolean saveResults, boolean saveOrgInt) {
+		
 		// For displaying and writing to disk
 		boolean displayOriginals = false;
 		boolean displayIntermediate = false;
 		boolean displayResults = false;
 		
 		// Get image size:
-		int matRows = images[0].imgMatrix.rows(); // 480 pixels
-		int matCols = images[0].imgMatrix.cols(); // 640 pixels
-		int matType = images[0].imgMatrix.type();
+		int matRows = images[0].rows(); // 480 pixels
+		int matCols = images[0].cols(); // 640 pixels
+		int matType = images[0].type();
 		// Declare target matrices for calculations
 		Mat temp1 = new Mat(matRows, matCols, matType);
 		Mat temp2 = new Mat(matRows, matCols, matType);
@@ -34,12 +34,12 @@ public class AnalyzeFrames {
 		for (int i = 0; i < NRFRAMES - 2; i++) {
 			results[i] = new Mat(matRows, matCols, matType);
 			
-			Core.absdiff(images[i].imgMatrix, images[i+2].imgMatrix, temp1);
-			Core.absdiff(images[i+1].imgMatrix, images[i+2].imgMatrix, temp2);
+			Core.absdiff(images[i], images[i+2], temp1);
+			Core.absdiff(images[i+1], images[i+2], temp2);
 			Core.bitwise_and(temp1, temp2, results[i]);
 
 			Imgproc.threshold(results[i], results[i], THRESHOLD, 255, Imgproc.THRESH_BINARY);
-			
+
 			int changes = 0;
 			int min_x = 0;
 			int max_x = 0;
@@ -54,10 +54,6 @@ public class AnalyzeFrames {
 			        // If pixel shows movement (value = 255), update area
 			    	if (results[i].get(j, k)[0] == 255) {
 			    		movement++;
-//			    		for (int z = 0; z < results[i].get(j, k).length; z++) {
-//			    			System.out.println(z);
-//			    			System.out.println(results[i].get(j, k)[z]);
-//			    		}
 			            changes++;
 			            if(min_x > k) min_x = k;
 			            if(max_x < k) max_x = k;
@@ -96,7 +92,7 @@ public class AnalyzeFrames {
 		if (displayOriginals) {
 			// Convert to buffered image and display
 			for (int i = 0; i < NRFRAMES - 2; i++) {
-				Mat2Buffered bufImg = new Mat2Buffered(images[i + 2].imgMatrix);
+				Mat2Buffered bufImg = new Mat2Buffered(images[i + 2]);
 				bufImg.display(rects[i]);
 			}
 		}
@@ -113,7 +109,7 @@ public class AnalyzeFrames {
 			// Convert to buffered image and display
 			for (int i = 0; i < images.length; i++) {
 				String name = path + picIndex + ".0.original" + i + ".jpg";
-				Highgui.imwrite(name, images[i].imgMatrix);
+				Highgui.imwrite(name, images[i]);
 			}
 		}
 		if (saveResults) {
