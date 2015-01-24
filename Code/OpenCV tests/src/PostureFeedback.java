@@ -17,7 +17,7 @@ public class PostureFeedback {
 	public static void main(String args[]) {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
-		int pause = 1000; // 1 seconds between every frame (every 30 seconds increases one second)
+		int pause = 100; // 1 seconds between every frame (every 30 seconds increases one second)
 		int recordTime = 30000; // 30 seconds
 		int getReadyTime = 2500; //
 		
@@ -168,13 +168,7 @@ public class PostureFeedback {
 	}
 		
 	private static Mat[] captureFrame(VideoCapture webcam, int pause) {
-		
-		if (pause < 1000) {
-			pause = 1000;
-		} else if (pause > 5000) {
-			pause = 5000;
-		}
-		
+				
 		try {
 			// Wait for webcam to be connected
 			Thread.sleep(pause);
