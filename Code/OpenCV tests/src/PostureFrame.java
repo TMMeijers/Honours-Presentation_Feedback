@@ -7,15 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 
- 
-/**
- * This class demonstrates how to create a basic
- * JFrame.  For example purposes, this frame will
- * have a label saying "Hello World!"
- * 
- * @see javax.swing.JFrame
- * @author Timothy Moore
- */
+@SuppressWarnings("serial")
 public class PostureFrame extends JFrame
 {
 	JLabel label;

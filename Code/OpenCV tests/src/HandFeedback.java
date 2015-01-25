@@ -1,5 +1,4 @@
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -28,7 +27,7 @@ public class HandFeedback {
 		int getReadyTime = 500; //
 		
 		// Paths to save results
-		String path = "experiment_results/handFeedback/"; // Go from static to dynamic (2 second pause between frames)
+		String path = "experiment_results/handFeedback/"; //
 
 		// Open text file for writing results
 		File output = new File(path + "output.txt");

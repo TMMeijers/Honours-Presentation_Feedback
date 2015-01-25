@@ -1,5 +1,4 @@
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 import java.awt.event.WindowEvent;
@@ -18,7 +17,7 @@ public class PostureFeedback {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 100; // 1 seconds between every frame (every 30 seconds increases one second)
-		int recordTime = 30000; // 30 seconds
+		int recordTime = 10000; // 30 seconds
 		int getReadyTime = 2500; //
 		
 		// Paths to save results
@@ -133,6 +132,7 @@ public class PostureFeedback {
 		return ((double)movement / (matRows * matCols)) * 100;
 	}	
 	
+	@SuppressWarnings("unused")
 	private static double analyzeThreeImages(Mat org, Mat current, Mat next, String path, int i) {
 		
 		int threshold = 50;
