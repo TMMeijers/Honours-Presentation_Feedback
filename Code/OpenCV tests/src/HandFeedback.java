@@ -24,7 +24,7 @@ public class HandFeedback {
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 100; //
 		int recordTime = 30000; // 
-		int getReadyTime = 500; //
+		int getReadyTime = 2500; //
 		
 		// Paths to save results
 		String path = "experiment_results/handFeedback/"; //
@@ -63,6 +63,8 @@ public class HandFeedback {
 		
 		// Get first image and its position
 		Mat orgImg = captureFrame(webcam, pause);
+		String name = path + "0.Startpicture.jpg";
+		Highgui.imwrite(name, orgImg);
 		Point orgPos = getInitialPoint(orgImg, path);
 		HandFrame frame = new HandFrame("Posture Feedback", orgImg);
 	
@@ -142,6 +144,10 @@ public class HandFeedback {
 	
 	private static double analyzeTwoImages(Point org, Mat next, String path, int i) {
 		Mat temp = next.clone();
+		// save img
+		i++;
+		String name = path + i + ".nextPicture.jpg";
+		Highgui.imwrite(name, temp);
 
 		// Get red blobss
 		Scalar min = new Scalar(0, 0, 170);
@@ -157,8 +163,7 @@ public class HandFeedback {
 		Imgproc.dilate(temp, temp, element);
 
 		// Save img
-		i++;
-		String name = path + i + ".next.jpg";
+		name = path + i + ".nextFrame.jpg";
 		Highgui.imwrite(name, temp);
 		
 		// Get blob positions
