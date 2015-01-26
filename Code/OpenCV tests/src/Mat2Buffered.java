@@ -45,6 +45,10 @@ public class Mat2Buffered {
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public BufferedImage returnBuffered() {
+		return img;
+	}
+	
 	public void display(Rectangle rect) {
 	    // Display BufferedImage
 		

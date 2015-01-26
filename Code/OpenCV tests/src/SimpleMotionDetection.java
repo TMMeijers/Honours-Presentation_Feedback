@@ -38,10 +38,9 @@ public class SimpleMotionDetection {
 		}
 		
 		// Get image size:
-		int matRows = images[0].imgMatrix.rows();
-		int matCols = images[0].imgMatrix.cols();
+		int matRows = images[0].imgMatrix.rows(); // 480 pixels
+		int matCols = images[0].imgMatrix.cols(); // 640 pixels
 		int matType = images[0].imgMatrix.type();
-
 		// Declare target matrices for calculations
 		Mat temp1 = new Mat(matRows, matCols, matType);
 		Mat temp2 = new Mat(matRows, matCols, matType);
@@ -63,24 +62,31 @@ public class SimpleMotionDetection {
 			int max_x = 0;
 			int min_y = 0;
 			int max_y = 0;
+			int movement = 0;
+			int nomovement = 0;
 			
 			// Check movement box
 			for(int j = 0; j < matRows; j+=2){ // height
 				for(int k = 0; k < matCols; k+=2){ // width
 			        // If pixel shows movement (value = 255), update area
 			    	if (results[i].get(j, k)[0] == 255) {
-			    		for (int z = 0; z < results[i].get(j, k).length; z++) {
-			    			System.out.println(z);
-			    			System.out.println(results[i].get(j, k)[z]);
-			    		}
+			    		movement++;
+//			    		for (int z = 0; z < results[i].get(j, k).length; z++) {
+//			    			System.out.println(z);
+//			    			System.out.println(results[i].get(j, k)[z]);
+//			    		}
 			            changes++;
 			            if(min_x > k) min_x = k;
 			            if(max_x < k) max_x = k;
 			            if(min_y > j) min_y = j;
 			            if(max_y < j) max_y = j;
+			        } else {
+			        	nomovement++;
 			        }
 			    }
 			}
+			System.out.println(movement);
+			System.out.println(nomovement);
 			
 			// Draw rectangle
 			if (changes > 0){

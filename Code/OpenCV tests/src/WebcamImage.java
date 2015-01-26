@@ -8,6 +8,7 @@ public class WebcamImage {
 	// WebcamImage is a matrix that represents a web cam image
 	public Mat imgMatrix;
 
+	
 	public WebcamImage(int pause) {
 		
 		if (pause < 1000) {
