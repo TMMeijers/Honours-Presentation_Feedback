@@ -55,6 +55,11 @@ public class AnalyzeAudio {
 		counter = counter/rate;
 		System.out.println("Your volume level was under 60 dB for " + counter
 				 + " seconds of the total of " + lengthAudio + " seconds.");
+			if (counter/lengthAudio < 0.8) {
+				System.out.println("This was too much silence, speak up more!");
+			} else {
+				System.out.println("This was loud enough.");
+			}
 
 
 		// FFT per time unit
