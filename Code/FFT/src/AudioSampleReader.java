@@ -24,7 +24,12 @@ public class AudioSampleReader {
             format.getFrameSize() * 8) / format.getSampleSizeInBits();
         return total / format.getChannels();
     }
-    
+
+    public float getSampleRate() {
+        float rate = format.getSampleRate();
+        return rate;
+    }
+
     // Get the intervealed decoded samples for all channels, from sample
     // index begin (included) to sample index end (excluded) and copy
     // them into samples. end must not exceed getSampleCount(), and the

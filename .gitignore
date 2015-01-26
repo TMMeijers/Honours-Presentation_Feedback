@@ -5,6 +5,7 @@
 *.jpg
 *.png
 *.wav
+*.jar
 
 # ECLIPSE RELATED:
 .metadata
