@@ -15,26 +15,30 @@ public class PostureFeedback {
 	
 	public static void main(String args[]) {
 		
+		boolean saveResults = false;
+		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 100; // 1 seconds between every frame (every 30 seconds increases one second)
-		int recordTime = 10000; // 30 seconds
-		int getReadyTime = 2500; //
+		int recordTime = 5000; // 30 seconds
+		int getReadyTime = 1000; //
 		
 		// Paths to save results
 		String path = "experiment_results/PostureFeedback/"; // Go from static to dynamic (2 second pause between frames)
-
-		// Open text file for writing results
-		File output = new File(path + "output.txt");
 		BufferedWriter bw = null;
-		try {
-			if (!output.exists()) {
-				// Create if it doesn't exist yet
-				output.createNewFile();
-				// Open buffered writer
-				bw = new BufferedWriter(new FileWriter(output.getAbsoluteFile()));
+		// Open text file for writing results
+		if (saveResults) {
+			File output = new File(path + "output.txt");
+			
+			try {
+				if (!output.exists()) {
+					// Create if it doesn't exist yet
+					output.createNewFile();
+					// Open buffered writer
+					bw = new BufferedWriter(new FileWriter(output.getAbsoluteFile()));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		
 		// Load openCV lib
@@ -54,16 +58,19 @@ public class PostureFeedback {
 		// Initialise output array
 		double outputs[] = new double[recordTime / pause];
 		int index = 0;
-		
-		Mat images[] = captureFrame(webcam, pause);
+
+		Mat images[] = captureFrame(webcam, pause); // Throw away first one (overexposed)
+		images = captureFrame(webcam, pause);
 		Mat orgImg = images[1];
 		Mat picture = images[0];
 		Mat nextImg;
 		
-		String name = path + "0.0.org.jpg";
-		Highgui.imwrite(name, picture);
-		PostureFrame frame = new PostureFrame("Posture Feedback", picture);
+		if (saveResults) {
+			String name = path + "0.0.org.jpg";
+			Highgui.imwrite(name, picture);
+		}
 		
+		PostureFrame frame = new PostureFrame("Posture Feedback", picture);
 		// Loop that gets images, analyzes them and prints output
 		for (int t = 0; t < recordTime; t += pause) {
 			// Capture three frames
@@ -73,22 +80,22 @@ public class PostureFeedback {
 			picture = images[0];
 			
 			// Analyse the frames
-			double result = analyzeTwoImages(orgImg, nextImg, path, index);
+			double result = analyzeTwoImages(orgImg, nextImg, path, index, saveResults);
 			outputs[index] = result;
 			
 			// Show results and save
 			frame.updateComponents(result, picture);
-			try {
-				// Write content to output file
-				bw.write(String.valueOf(result) + '\n');
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (saveResults) {
+				try {
+					// Write content to output file
+					bw.write(String.valueOf(result) + '\n');
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				index++;
+				String name = path + index + ".1.next.jpg";
+				Highgui.imwrite(name, picture);
 			}
-			index++;
-//			name = path + index + ".0.current.jpg";
-//			Highgui.imwrite(name, currentImg);
-			name = path + index + ".1.next.jpg";
-			Highgui.imwrite(name, picture);
 		}
 		
 		// Close buffered writer
@@ -102,7 +109,7 @@ public class PostureFeedback {
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 	} // End main
 	
-	private static double analyzeTwoImages(Mat org, Mat next, String path, int i) {
+	private static double analyzeTwoImages(Mat org, Mat next, String path, int i, boolean saveResults) {
 		
 		int threshold = 50;
 		int matRows = org.rows(); // 480 pixels
@@ -116,9 +123,11 @@ public class PostureFeedback {
 
 		Imgproc.threshold(result, result, threshold, 255, Imgproc.THRESH_BINARY);
 
-		i++;
-		String name = path + i + ".1.result.jpg";
-		Highgui.imwrite(name, result);
+		if (saveResults) {
+			i++;
+			String name = path + i + ".1.result.jpg";
+			Highgui.imwrite(name, result);
+		}
 		
 		int movement = 0;
 		for(int j = 0; j < matRows; j++){ // height
@@ -133,7 +142,7 @@ public class PostureFeedback {
 	}	
 	
 	@SuppressWarnings("unused")
-	private static double analyzeThreeImages(Mat org, Mat current, Mat next, String path, int i) {
+	private static double analyzeThreeImages(Mat org, Mat current, Mat next, String path, int i, boolean saveResults) {
 		
 		int threshold = 50;
 		int matRows = org.rows(); // 480 pixels
@@ -151,9 +160,11 @@ public class PostureFeedback {
 
 		Imgproc.threshold(result, result, threshold, 255, Imgproc.THRESH_BINARY);
 
-		i++;
-		String name = path + i + ".2.result.jpg";
-		Highgui.imwrite(name, result);
+		if (saveResults) {
+			i++;
+			String name = path + i + ".2.result.jpg";
+			Highgui.imwrite(name, result);
+		}
 		
 		int movement = 0;
 		for(int j = 0; j < matRows; j++){ // height
