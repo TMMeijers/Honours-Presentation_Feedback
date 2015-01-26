@@ -45,17 +45,16 @@ public class AnalyzeAudio {
 		}
 
 		// dB per sample
-		double dB = 0;
 		double counter = 0;
 		for (int i = 0; i < nrSamples; i++) {
 			double vol =+ -20 * Math.log10(Math.abs(realInput[i]));
-			if (vol > 75 && !(vol > 200)) {
-				counter += 1.0;
-				dB += vol;
+			if (vol < 30) {
+				counter += 1.0;	
 			}
 		}
-		double dBAverage = dB/counter;
-		System.out.println(dB + ":" + counter + ":" + dBAverage + ":" + nrSamples);
+		counter = counter/rate;
+		System.out.println("Your volume level was under 60 dB for " + counter
+				 + " seconds of the total of " + lengthAudio + " seconds.");
 
 
 		// FFT per time unit
