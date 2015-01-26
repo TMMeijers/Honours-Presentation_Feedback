@@ -21,26 +21,30 @@ public class HandFeedback {
 	
 	public static void main(String args[]) {
 		
+		boolean saveResults = false;
+		
 		// Set time between frames (min 1000 ms. max 5000 ms)
-		int pause = 100; //
-		int recordTime = 5000; // 
+		int pause = 50; //
+		int recordTime = 50000; // 
 		int getReadyTime = 1000; //
 		
 		// Paths to save results
 		String path = "experiment_results/handFeedback/"; //
 
-		// Open text file for writing results
-		File output = new File(path + "output.txt");
 		BufferedWriter bw = null;
-		try {
-			if (!output.exists()) {
-				// Create if it doesn't exist yet
-				output.createNewFile();
-				// Open buffered writer
-				bw = new BufferedWriter(new FileWriter(output.getAbsoluteFile()));
+		// Open text file for writing results
+		if (saveResults) {
+			File output = new File(path + "output.txt");
+			try {
+				if (!output.exists()) {
+					// Create if it doesn't exist yet
+					output.createNewFile();
+					// Open buffered writer
+					bw = new BufferedWriter(new FileWriter(output.getAbsoluteFile()));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		
 		// Load openCV lib
@@ -64,8 +68,10 @@ public class HandFeedback {
 		// Get first image and its position
 		Mat orgImg = captureFrame(webcam, pause); // Throw away first one (over exposed)
 		orgImg = captureFrame(webcam, pause);
-		String name = path + "0.Startpicture.jpg";
-		Highgui.imwrite(name, orgImg);
+		if (saveResults) {
+			String name = path + "0.Startpicture.jpg";
+			Highgui.imwrite(name, orgImg);
+		}
 		Point orgPos = getInitialPoint(orgImg, path);
 		HandFrame frame = new HandFrame("Gesture Feedback", orgImg);
 	
@@ -77,18 +83,20 @@ public class HandFeedback {
 			nextImg = captureFrame(webcam, pause);
 			
 			// Analyse the frames
-			double result = analyzeTwoImages(orgPos, nextImg, path, index);
+			double result = analyzeTwoImages(orgPos, nextImg, path, index, saveResults);
 			outputs[index] = result;
 			
 			// Show results and save
 			frame.updateComponents(result, nextImg);
-			try {
-				// Write content to output file
-				bw.write(String.valueOf(result) + '\n');
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (saveResults) {
+				try {
+					// Write content to output file
+					bw.write(String.valueOf(result) + '\n');
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				index++;
 			}
-			index++;
 		}
 		
 		// Close buffered writer
@@ -143,7 +151,7 @@ public class HandFeedback {
 		return position;
 	}
 	
-	private static double analyzeTwoImages(Point org, Mat next, String path, int i) {
+	private static double analyzeTwoImages(Point org, Mat next, String path, int i, boolean saveResults) {
 		Mat temp = next.clone();
 		// save img
 		i++;
@@ -164,8 +172,10 @@ public class HandFeedback {
 		Imgproc.dilate(temp, temp, element);
 
 		// Save img
-		name = path + i + ".nextFrame.jpg";
-		Highgui.imwrite(name, temp);
+		if (saveResults) {
+			name = path + i + ".nextFrame.jpg";
+			Highgui.imwrite(name, temp);
+		}
 		
 		// Get blob positions
 		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
