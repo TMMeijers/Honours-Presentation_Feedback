@@ -59,7 +59,7 @@ public class HandFrame extends JFrame
         label.setForeground(Color.orange);
         label.setFont(new Font("Serif", Font.BOLD, fontSize)); 	
     } else if (info < 350) {
-        label = new JLabel("GOOD HAND MOVEMENT");   
+        label = new JLabel("HAND MOVEMENT");   
         label.setForeground(Color.green);
         label.setFont(new Font("Serif", Font.BOLD, fontSize)); 
     } else {

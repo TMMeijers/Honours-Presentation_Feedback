@@ -85,8 +85,6 @@ public class PostureFeedback {
 				e.printStackTrace();
 			}
 			index++;
-//			name = path + index + ".0.current.jpg";
-//			Highgui.imwrite(name, currentImg);
 			name = path + index + ".1.next.jpg";
 			Highgui.imwrite(name, picture);
 		}
