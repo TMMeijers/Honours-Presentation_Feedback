@@ -172,7 +172,7 @@ public class AudioRecorder02 extends JFrame {
 			// Set the file type and the file extension
 			// based on the selected radio button.
 			fileType = AudioFileFormat.Type.WAVE;
-			audioFile = new File("src/junk.wav");
+			audioFile = new File("junk.wav");
 
 			try {
 				targetDataLine.open(audioFormat);
