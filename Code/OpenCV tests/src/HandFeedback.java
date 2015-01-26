@@ -23,8 +23,8 @@ public class HandFeedback {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 100; //
-		int recordTime = 30000; // 
-		int getReadyTime = 2500; //
+		int recordTime = 5000; // 
+		int getReadyTime = 1000; //
 		
 		// Paths to save results
 		String path = "experiment_results/handFeedback/"; //
@@ -62,11 +62,12 @@ public class HandFeedback {
 		int index = 0;
 		
 		// Get first image and its position
-		Mat orgImg = captureFrame(webcam, pause);
+		Mat orgImg = captureFrame(webcam, pause); // Throw away first one (over exposed)
+		orgImg = captureFrame(webcam, pause);
 		String name = path + "0.Startpicture.jpg";
 		Highgui.imwrite(name, orgImg);
 		Point orgPos = getInitialPoint(orgImg, path);
-		HandFrame frame = new HandFrame("Posture Feedback", orgImg);
+		HandFrame frame = new HandFrame("Gesture Feedback", orgImg);
 	
 		Mat nextImg;
 		

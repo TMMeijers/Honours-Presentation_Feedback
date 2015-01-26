@@ -17,8 +17,8 @@ public class PostureFeedback {
 		
 		// Set time between frames (min 1000 ms. max 5000 ms)
 		int pause = 100; // 1 seconds between every frame (every 30 seconds increases one second)
-		int recordTime = 10000; // 30 seconds
-		int getReadyTime = 2500; //
+		int recordTime = 5000; // 30 seconds
+		int getReadyTime = 1000; //
 		
 		// Paths to save results
 		String path = "experiment_results/PostureFeedback/"; // Go from static to dynamic (2 second pause between frames)
@@ -54,8 +54,9 @@ public class PostureFeedback {
 		// Initialise output array
 		double outputs[] = new double[recordTime / pause];
 		int index = 0;
-		
-		Mat images[] = captureFrame(webcam, pause);
+
+		Mat images[] = captureFrame(webcam, pause); // Throw away first one (overexposed)
+		images = captureFrame(webcam, pause);
 		Mat orgImg = images[1];
 		Mat picture = images[0];
 		Mat nextImg;
